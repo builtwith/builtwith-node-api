@@ -276,6 +276,21 @@ function BuiltWith(apiKey, moduleParams = {}) {
 
       return utils.makeStandardRequest(bwURL, responseFormat);
     },
+
+    /**
+     * Make a request to the BuiltWith Vector Search API
+     * @see https://api.builtwith.com/vector-api
+     * @param {String} query - text search query
+     * @param {Object} params
+     */
+    vectorSearch: async function (query, params) {
+      const limit = params && params.limit;
+      const bwURL = constructBuiltWithURL("vector/v1", {
+        QUERY: query,
+        LIMIT: limit,
+      });
+      return utils.makeStandardRequest(bwURL, responseFormat);
+    },
   };
 }
 
