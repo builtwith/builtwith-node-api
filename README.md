@@ -39,6 +39,7 @@ npm install builtwith-api
 | 💡 `recommendations` | Technology suggestions |
 | ↪️ `redirects` | Redirect chain history |
 | 🛒 `product` | E-commerce product search |
+| 🔎 `vectorSearch` | Semantic technology/category search |
 
 ________________
 
@@ -133,6 +134,10 @@ await builtwith.redirects(url)
 
 // 🛒 Search for e-commerce sites selling specific products
 await builtwith.product('shoes')
+
+// 🔎 Semantic vector search for technologies and categories
+await builtwith.vectorSearch('react framework')
+await builtwith.vectorSearch('ecommerce platform', { limit: 20 })
 ```
 
 ## 📚 Learn More
