@@ -291,6 +291,23 @@ function BuiltWith(apiKey, moduleParams = {}) {
       });
       return utils.makeStandardRequest(bwURL, responseFormat);
     },
+
+    /**
+     * Make a request to the BuiltWith Keyword Search API
+     * @see https://api.builtwith.com/keyword-search-api
+     * @param {String} keyword - keyword to search for
+     * @param {Object} params - optional: { limit, offset }
+     */
+    keywordSearch: async function (keyword, params) {
+      const limit = params && params.limit;
+      const offset = params && params.offset;
+      const bwURL = constructBuiltWithURL("kws1", {
+        KEYWORD: keyword,
+        LIMIT: limit,
+        OFFSET: offset,
+      });
+      return utils.makeStandardRequest(bwURL, responseFormat);
+    },
   };
 }
 
