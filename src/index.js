@@ -317,7 +317,7 @@ async function agentAuthStart() {
   const https = require("https");
   return new Promise((resolve) => {
     const req = https.request(
-      { hostname: "api.builtwith.com", path: "/agent-auth-start", method: "POST",
+      { hostname: "api.builtwith.com", path: "/agent-auth/start", method: "POST",
         headers: { "Content-Type": "application/json", "Content-Length": 2 } },
       (res) => {
         let body = "";
@@ -340,7 +340,7 @@ async function agentAuthToken(deviceCode) {
   const payload = JSON.stringify({ device_code: deviceCode });
   return new Promise((resolve) => {
     const req = https.request(
-      { hostname: "api.builtwith.com", path: "/agent-auth-token", method: "POST",
+      { hostname: "api.builtwith.com", path: "/agent-auth/token", method: "POST",
         headers: { "Content-Type": "application/json", "Content-Length": Buffer.byteLength(payload) } },
       (res) => {
         let body = "";
