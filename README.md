@@ -40,6 +40,8 @@ npm install builtwith-api
 | ↪️ `redirects` | Redirect chain history |
 | 🛒 `product` | E-commerce product search |
 | 🔎 `vectorSearch` | Semantic technology/category search |
+| 🔐 `BuiltWith.agentAuthStart()` | Start Device-Code Authorization (no API key required) |
+| 🔐 `BuiltWith.agentAuthToken(deviceCode)` | Poll for auth result and access token (no API key required) |
 
 ________________
 
@@ -138,6 +140,29 @@ await builtwith.product('shoes')
 // 🔎 Semantic vector search for technologies and categories
 await builtwith.vectorSearch('react framework')
 await builtwith.vectorSearch('ecommerce platform', { limit: 20 })
+```
+
+## 🔐 Agent Device-Code Authorization
+
+Agents can obtain a temporary `bw-` prefixed API token without the user pasting their key. These are module-level static functions — no API key needed to call them.
+
+```js
+const BuiltWith = require('builtwith-api');
+
+// Step 1: start the flow
+const start = await BuiltWith.agentAuthStart();
+// start.data => { device_code, verification_uri }
+
+console.log(`Open in browser: ${start.data.verification_uri}`);
+
+// Step 2: poll every 5 seconds until approved or denied
+const token = await BuiltWith.agentAuthToken(start.data.device_code);
+// token.data => { status: 'pending' | 'approved' | 'denied', access_token? }
+
+if (token.data.status === 'approved') {
+  const builtwith = BuiltWith(token.data.access_token);
+  // use normally
+}
 ```
 
 ## 📚 Learn More
