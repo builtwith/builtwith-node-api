@@ -311,10 +311,61 @@ function BuiltWith(apiKey, moduleParams = {}) {
   };
 }
 
+// ── Agent Device-Code Authorization (no API key required) ─────────────────────
+
+async function agentAuthStart() {
+  const https = require("https");
+  return new Promise((resolve) => {
+    const req = https.request(
+      { hostname: "api.builtwith.com", path: "/agent-auth/start", method: "POST",
+        headers: { "Content-Type": "application/json", "Content-Length": 2 } },
+      (res) => {
+        let body = "";
+        res.on("data", (chunk) => (body += chunk));
+        res.on("end", () => {
+          try { resolve({ ok: true, data: JSON.parse(body) }); }
+          catch (_) { resolve({ ok: false, error: "Failed to parse response" }); }
+        });
+      }
+    );
+    req.on("error", (err) => resolve({ ok: false, error: err.message }));
+    req.write("{}");
+    req.end();
+  });
+}
+
+async function agentAuthToken(deviceCode) {
+  if (!deviceCode) throw new Error("deviceCode is required");
+  const https = require("https");
+  const payload = JSON.stringify({ device_code: deviceCode });
+  return new Promise((resolve) => {
+    const req = https.request(
+      { hostname: "api.builtwith.com", path: "/agent-auth/token", method: "POST",
+        headers: { "Content-Type": "application/json", "Content-Length": Buffer.byteLength(payload) } },
+      (res) => {
+        let body = "";
+        res.on("data", (chunk) => (body += chunk));
+        res.on("end", () => {
+          try { resolve({ ok: true, data: JSON.parse(body) }); }
+          catch (_) { resolve({ ok: false, error: "Failed to parse response" }); }
+        });
+      }
+    );
+    req.on("error", (err) => resolve({ ok: false, error: err.message }));
+    req.write(payload);
+    req.end();
+  });
+}
+
 // Constructor to authenticate and get module
-module.exports = function (apiKey, moduleParams) {
+const BuiltWithFactory = function (apiKey, moduleParams) {
   if (!apiKey) {
     throw new Error("You must initialize the BuiltWith module with an api key");
   }
   return BuiltWith(apiKey, moduleParams);
 };
+
+BuiltWithFactory.agentAuthStart = agentAuthStart;
+BuiltWithFactory.agentAuthToken = agentAuthToken;
+
+module.exports = BuiltWithFactory;
