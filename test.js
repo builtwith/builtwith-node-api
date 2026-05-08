@@ -22,6 +22,13 @@ async function domainTest() {
   console.log(JSON.stringify(bwData));
 }
 
+async function changeTest() {
+  const bwData = await builtwith.change(url, {
+    since: "last month",
+  });
+  console.log(JSON.stringify(bwData));
+}
+
 async function listsTest() {
   const bwData = await builtwith.lists(tech);
   console.log(JSON.stringify(bwData));
@@ -87,6 +94,7 @@ async function productTest() {
 
 // freeTest();
 // domainTest();
+// changeTest();
 // listsTest();
 // trendsTest();
 // relationshipsTest();

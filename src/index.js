@@ -89,6 +89,26 @@ function BuiltWith(apiKey, moduleParams = {}) {
     },
 
     /**
+     * Make a request to the BuiltWith Change API
+     *
+     * @see https://api.builtwith.com/change-api
+     * @param {(string|string[])} url
+     * @param {Object} params
+     */
+    change: async function (url, params) {
+      checkUrlData(url);
+      const since = params && params.since;
+      const lookup = Array.isArray(url) ? url.join(",") : url;
+
+      const bwURL = constructBuiltWithURL("change1", {
+        LOOKUP: lookup,
+        SINCE: since ? encodeURIComponent(since) : undefined,
+      });
+
+      return utils.makeStandardRequest(bwURL, responseFormat);
+    },
+
+    /**
      * Make a request to the BuiltWith Lists API
      *
      * @see https://api.builtwith.com/lists-api

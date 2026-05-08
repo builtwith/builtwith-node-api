@@ -28,6 +28,7 @@ npm install builtwith-api
 |--------|-------------|
 | 🆓 `free` | Free technology summary |
 | 🌐 `domain` | Full domain technology lookup |
+| 🔄 `change` | Technology additions and removals |
 | 📋 `lists` | Sites using a technology |
 | 🔗 `relationships` | Related domains |
 | 🔑 `keywords` | Domain keyword extraction |
@@ -79,6 +80,10 @@ await builtwith.domain(url, {
   // Filter by last detected date range
   lastDetectedRange: undefined
 })
+
+// 🔄 Technology changes since a natural-language date
+await builtwith.change(url)
+await builtwith.change(['shopify.com', 'builtwith.com'], { since: 'last month' })
 
 // 📋 List sites using a technology
 const technology = 'Shopify'
