@@ -91,6 +91,8 @@ const technology = 'Shopify'
 await builtwith.lists(technology, {
   // Brings back meta data with the results, which includes names, titles, social links, addresses, emails, telephone numbers, traffic ranks etc.
   includeMetaData: true,
+  // Require each result to also use these comma-separated technologies, maximum 16.
+  otherTechs: 'Google-Analytics,Meta-Pixel',
   // Gets the next page of results - use the exact value from NextOffset in response. If the value of NextOffset is END there are no more results.
   offset: 'oQEwEnH2FJuIzeXOEk2T',
   // Gets live sites using the technology since a certain time, accepts dates and queries i.e. 30 Days Ago or Last January for example.

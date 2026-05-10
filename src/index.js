@@ -119,9 +119,11 @@ function BuiltWith(apiKey, moduleParams = {}) {
       const includeMetaData = params && params.includeMetaData !== undefined ? params.includeMetaData : false;
       const offset = params && params.offset;
       const since = params && params.since;
+      const otherTechs = params && params.otherTechs;
 
       const bwURL = constructBuiltWithURL("lists12", {
         TECH: technology,
+        OTHERTECHS: otherTechs,
         META: includeMetaData,
         OFFSET: offset,
         SINCE: since,
