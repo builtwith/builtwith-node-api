@@ -96,7 +96,13 @@ await builtwith.lists(technology, {
   // Gets the next page of results - use the exact value from NextOffset in response. If the value of NextOffset is END there are no more results.
   offset: 'oQEwEnH2FJuIzeXOEk2T',
   // Gets live sites using the technology since a certain time, accepts dates and queries i.e. 30 Days Ago or Last January for example.
-  since: '2016-01-20'
+  since: '2016-01-20',
+  // Attribute filters use number|operator. Operators: EQ, LT, LTE, GT, GTE. Filters are combined with AND.
+  filters: {
+    REVENUE: '100000|GT',
+    SPEND: '100|GTE',
+    EMPLOYEES: '50|GTE'
+  }
 })
 
 // 🔗 Find related domains

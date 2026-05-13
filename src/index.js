@@ -38,6 +38,27 @@ function BuiltWith(apiKey, moduleParams = {}) {
     }
   }
 
+  function getListFilterParams(params = {}) {
+    const filterKeys = [
+      "SPEND", "REVENUE", "SKU", "FOLLOWERS", "EMPLOYEES", "SITEMAP",
+      "PAGERANK", "BWRANK", "TRANCO", "MAJESTIC", "BWS", "ECAT",
+      "AIM", "AIO", "AIR", "AIV",
+    ];
+    const filters = {};
+
+    for (const [key, value] of Object.entries(params.filters || {})) {
+      filters[key.toUpperCase()] = value;
+    }
+
+    for (const key of filterKeys) {
+      const lowerKey = key.toLowerCase();
+      if (params[lowerKey] !== undefined) filters[key] = params[lowerKey];
+      if (params[key] !== undefined) filters[key] = params[key];
+    }
+
+    return filters;
+  }
+
   return {
     /**
      * Make a request to the BuiltWith Free API
@@ -120,6 +141,7 @@ function BuiltWith(apiKey, moduleParams = {}) {
       const offset = params && params.offset;
       const since = params && params.since;
       const otherTechs = params && params.otherTechs;
+      const filters = getListFilterParams(params);
 
       const bwURL = constructBuiltWithURL("lists12", {
         TECH: technology,
@@ -127,6 +149,7 @@ function BuiltWith(apiKey, moduleParams = {}) {
         META: includeMetaData,
         OFFSET: offset,
         SINCE: since,
+        ...filters,
       });
 
       return utils.makeBulletProofRequest(bwURL, responseFormat);
