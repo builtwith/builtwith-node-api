@@ -154,6 +154,15 @@ await builtwith.product('shoes')
 // 🔎 Semantic vector search for technologies and categories
 await builtwith.vectorSearch('react framework')
 await builtwith.vectorSearch('ecommerce platform', { limit: 20 })
+
+// 💬 Natural language website list lookup
+await builtwith.ask('Magento websites in Spain')
+
+// Full report (up to 1000 results)
+const result = await builtwith.ask('Shopify stores in the US', { commit: true })
+
+// Paginate using NextOffset from previous response
+await builtwith.ask('Shopify stores in the US', { commit: true, nextOffset: result.NextOffset })
 ```
 
 ## 🔐 Agent Device-Code Authorization
