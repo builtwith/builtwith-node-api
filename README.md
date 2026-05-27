@@ -41,6 +41,7 @@ npm install builtwith-api
 | ↪️ `redirects` | Redirect chain history |
 | 🛒 `product` | E-commerce product search |
 | 🔎 `vectorSearch` | Semantic technology/category search |
+| 💬 `ask` | Natural language website list lookup |
 | 🔐 `BuiltWith.agentAuthStart()` | Start Device-Code Authorization (no API key required) |
 | 🔐 `BuiltWith.agentAuthToken(deviceCode)` | Poll for auth result and access token (no API key required) |
 

@@ -353,6 +353,28 @@ function BuiltWith(apiKey, moduleParams = {}) {
       });
       return utils.makeStandardRequest(bwURL, responseFormat);
     },
+
+    /**
+     * Make a request to the BuiltWith Ask API
+     * @see https://api.builtwith.com/ask-api
+     * @param {String} query - natural language query (e.g. "Magento websites in Spain")
+     * @param {Object} params - optional: { commit, nextOffset, meta }
+     *   commit {Boolean} - set true to run a full report (up to 1000 results)
+     *   nextOffset {String} - pagination offset from previous response's NextOffset
+     *   meta {Boolean} - set true to include metadata
+     */
+    ask: async function (query, params) {
+      const commit = params && params.commit;
+      const nextOffset = params && params.nextOffset;
+      const meta = params && params.meta;
+      const bwURL = constructBuiltWithURL("ask1", {
+        QUERY: query,
+        COMMIT: commit ? "true" : undefined,
+        NEXTOFFSET: nextOffset,
+        META: meta ? "yes" : undefined,
+      });
+      return utils.makeStandardRequest(bwURL, responseFormat);
+    },
   };
 }
 
