@@ -20,8 +20,9 @@ function BuiltWith(apiKey, moduleParams = {}) {
     apiName,
     requestParams = {},
     subdomain = "api",
+    endpoint = "api",
   ) {
-    let bwURL = `https://${subdomain}.builtwith.com/${apiName}/api.${responseFormat}?KEY=${apiKey}`;
+    let bwURL = `https://${subdomain}.builtwith.com/${apiName}/${endpoint}.${responseFormat}?KEY=${apiKey}`;
 
     const qs = utils.paramsObjToQueryString(requestParams);
     if (qs) {
@@ -351,6 +352,33 @@ function BuiltWith(apiKey, moduleParams = {}) {
         LIMIT: limit,
         OFFSET: offset,
       });
+      return utils.makeStandardRequest(bwURL, responseFormat);
+    },
+
+    /**
+     * Make a request to the BuiltWith VAT API
+     *
+     * @see https://api.builtwith.com/vat-api
+     * @param {String} url - 1 to 16 comma-separated domains
+     */
+    vat: async function (url) {
+      checkUrlData(url);
+
+      const bwURL = constructBuiltWithURL("vat1", {
+        LOOKUP: url,
+      });
+
+      return utils.makeStandardRequest(bwURL, responseFormat);
+    },
+
+    /**
+     * Make a request to the BuiltWith VAT Types API
+     *
+     * @see https://api.builtwith.com/vat-api
+     */
+    vatTypes: async function () {
+      const bwURL = constructBuiltWithURL("vat1", {}, "api", "types");
+
       return utils.makeStandardRequest(bwURL, responseFormat);
     },
 

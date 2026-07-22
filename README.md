@@ -36,6 +36,8 @@ npm install builtwith-api
 | 🏢 `companyToUrl` | Company name to domains |
 | ⚡ `domainLive` | Live domain detection |
 | 🛡️ `trust` | Trust & fraud signals |
+| 🧾 `vat` | VAT, GST, and company registration numbers |
+| 🧾 `vatTypes` | VAT registration type reference (no API key required) |
 | 🏷️ `tags` | IP & attribute lookups |
 | 💡 `recommendations` | Technology suggestions |
 | ↪️ `redirects` | Redirect chain history |
@@ -138,6 +140,12 @@ await builtwith.trust(url, {
   // Performs a live lookup of the website in question. This slows down the response. A result with a status of 'needLive' requires the LIVE option to determine if the website is suspect or not.
   live: false
 })
+
+// 🧾 VAT, GST, and company registration numbers
+await builtwith.vat(url)
+
+// 🧾 VAT registration type reference (no API key required)
+await builtwith.vatTypes()
 
 // 🏷️ Get domains related to IPs and site attributes. Use 'IP-1.2.3.4' format for IP lookups.
 await builtwith.tags(url)
