@@ -383,6 +383,25 @@ function BuiltWith(apiKey, moduleParams = {}) {
     },
 
     /**
+     * Make a request to the BuiltWith MCP API
+     *
+     * @see https://api.builtwith.com/mcp-api
+     * @param {Object} params - optional: { search, category, offset }
+     *   search {String} - matches domain, description, endpoint URL, and tool names/descriptions
+     *   category {String} - category to filter by
+     *   offset {Number} - pagination offset
+     */
+    mcpRegistry: async function (params = {}) {
+      const bwURL = constructBuiltWithURL("mcp1", {
+        SEARCH: params.search,
+        CATEGORY: params.category,
+        OFFSET: params.offset,
+      });
+
+      return utils.makeStandardRequest(bwURL, responseFormat);
+    },
+
+    /**
      * Make a request to the BuiltWith Ask API
      * @see https://api.builtwith.com/ask-api
      * @param {String} query - natural language query (e.g. "Magento websites in Spain")
