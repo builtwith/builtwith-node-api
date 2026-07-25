@@ -249,7 +249,7 @@ function BuiltWith(apiKey, moduleParams = {}) {
       const words = (params && params.words) || "";
       const live = params && params.live !== undefined ? params.live : false;
 
-      const bwURL = constructBuiltWithURL("trustv1", {
+      const bwURL = constructBuiltWithURL("trustv2", {
         LOOKUP: url,
         WORDS: words
           .split(",")
