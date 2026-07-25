@@ -42,7 +42,8 @@ npm install builtwith-api
 | 💡 `recommendations` | Technology suggestions |
 | ↪️ `redirects` | Redirect chain history |
 | 🛒 `product` | E-commerce product search |
-| 🔌 `mcpRegistry` | Search/browse the BuiltWith MCP registry of discovered remote MCP servers (no API credits) |
+| 🔌 `mcpRegistry` | Search/browse the BuiltWith MCP registry (v1) of discovered remote MCP servers (no API credits) |
+| 🔌 `mcpRegistryV2` | Search/browse the BuiltWith MCP registry (v2), with per-endpoint auth flags and first/last detected dates (no API credits) |
 | 🔎 `vectorSearch` | Semantic technology/category search |
 | 💬 `ask` | Natural language website list lookup |
 | 🔐 `BuiltWith.agentAuthStart()` | Start Device-Code Authorization (no API key required) |
@@ -148,8 +149,11 @@ await builtwith.vat(url)
 // 🧾 VAT registration type reference (no API key required)
 await builtwith.vatTypes()
 
-// 🔌 Search/browse the BuiltWith MCP registry of discovered remote MCP servers (no API credits)
+// 🔌 Search/browse the BuiltWith MCP registry (v1) of discovered remote MCP servers (no API credits)
 await builtwith.mcpRegistry({ search: 'payments' })
+
+// 🔌 Search/browse the BuiltWith MCP registry (v2), with per-endpoint auth flags and first/last detected dates (no API credits)
+await builtwith.mcpRegistryV2({ search: 'payments' })
 
 // 🏷️ Get domains related to IPs and site attributes. Use 'IP-1.2.3.4' format for IP lookups.
 await builtwith.tags(url)
