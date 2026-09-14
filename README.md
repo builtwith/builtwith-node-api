@@ -1,5 +1,9 @@
 # 🔍 BuiltWith API
 
+## Domain API v25
+
+Domain lookups now use API v25. Technology records include numeric `confidence` scores from 0 to 1. Full JSON responses include `Meta.company_reg`, an array of company registration records with string `type` and `number` fields; registration numbers preserve leading zeros. The array is empty when unavailable or metadata is excluded. See the [API reference](https://api.builtwith.com/llms.txt).
+
 `builtwith-api` is a utility wrapper for the BuiltWith API suite. Find out what any website is built with! 🚀
 
 ## 📦 Installation

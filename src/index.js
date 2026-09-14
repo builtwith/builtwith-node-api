@@ -95,7 +95,7 @@ function BuiltWith(apiKey, moduleParams = {}) {
       const firstDetectedRange = params && params.firstDetectedRange !== undefined ? params.firstDetectedRange : undefined;
       const lastDetectedRange = params && params.lastDetectedRange !== undefined ? params.lastDetectedRange : undefined;
 
-      const bwURL = constructBuiltWithURL("v23", {
+      const bwURL = constructBuiltWithURL("v25", {
         LOOKUP: url,
         HIDETEXT: hideAll,
         HIDEDL: hideDescriptionAndLinks,
