@@ -1,8 +1,14 @@
 # 🔍 BuiltWith API
 
-## Domain API v25
+## Current API endpoints
 
-Domain lookups now use API v25. Technology records include numeric `confidence` scores from 0 to 1. Full JSON responses include `Meta.company_reg`, an array of company registration records with string `type` and `number` fields; registration numbers preserve leading zeros. The array is empty when unavailable or metadata is excluded. See the [API reference](https://api.builtwith.com/llms.txt).
+Uses Domain v26, Lists v13, Relationships v5, and MCP Registry v2 where supported. Existing unversioned registry methods now use v2; explicit v2 aliases remain available. Registry JSON is an array with per-endpoint tools and discovery `Overview` objects.
+
+Relationships requests return one page (up to 1000 records). Pass `next_page` as `PAGE` while `more_results` is true, keeping the lookup domain and IP option unchanged. `OFFSET` and `SKIP` are not supported. Bulk Domain retains its separate `/v23/domain/bulk` routes.
+
+## Domain API v26
+
+Domain lookups now use API v26. Technology records include numeric `confidence` scores from 0 to 1. Full JSON responses include `Meta.company_reg`, an array of company registration records with string `type` and `number` fields; registration numbers preserve leading zeros. The array is empty when unavailable or metadata is excluded. See the [API reference](https://api.builtwith.com/llms.txt).
 
 `builtwith-api` is a utility wrapper for the BuiltWith API suite. Find out what any website is built with! 🚀
 
@@ -211,3 +217,5 @@ if (token.data.status === 'approved') {
 ## 📚 Learn More
 
 Check out the full API docs at [api.builtwith.com](https://api.builtwith.com) 🎉
+
+Relationships paging: `await builtwith.relationships("example.com", { page: 2, ip: true })`. Read `next_page` and `more_results` from the returned response.

@@ -95,7 +95,7 @@ function BuiltWith(apiKey, moduleParams = {}) {
       const firstDetectedRange = params && params.firstDetectedRange !== undefined ? params.firstDetectedRange : undefined;
       const lastDetectedRange = params && params.lastDetectedRange !== undefined ? params.lastDetectedRange : undefined;
 
-      const bwURL = constructBuiltWithURL("v25", {
+      const bwURL = constructBuiltWithURL("v26", {
         LOOKUP: url,
         HIDETEXT: hideAll,
         HIDEDL: hideDescriptionAndLinks,
@@ -144,7 +144,7 @@ function BuiltWith(apiKey, moduleParams = {}) {
       const otherTechs = params && params.otherTechs;
       const filters = getListFilterParams(params);
 
-      const bwURL = constructBuiltWithURL("lists12", {
+      const bwURL = constructBuiltWithURL("lists13", {
         TECH: technology,
         OTHERTECHS: otherTechs,
         META: includeMetaData,
@@ -162,10 +162,13 @@ function BuiltWith(apiKey, moduleParams = {}) {
      * @see https://api.builtwith.com/relationships-api
      * @param {(string|string[])} url
      */
-    relationships: async function (url) {
-      checkUrlData(url);
-      const bwURL = constructBuiltWithURL("rv4", {
+    relationships: async function (url, params = {}) {
+      checkUrlData(url, false);
+      if (params.page != null && (!Number.isInteger(params.page) || params.page < 1)) throw new Error("page must be a positive integer");
+      const bwURL = constructBuiltWithURL("rv5", {
         LOOKUP: url,
+        PAGE: params.page,
+        IP: params.ip ? "yes" : undefined,
       });
 
       return utils.makeStandardRequest(bwURL, responseFormat);
@@ -392,7 +395,7 @@ function BuiltWith(apiKey, moduleParams = {}) {
      *   offset {Number} - pagination offset
      */
     mcpRegistry: async function (params = {}) {
-      const bwURL = constructBuiltWithURL("mcp1", {
+      const bwURL = constructBuiltWithURL("mcp2", {
         SEARCH: params.search,
         CATEGORY: params.category,
         OFFSET: params.offset,
